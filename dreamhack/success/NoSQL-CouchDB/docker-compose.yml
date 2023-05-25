@@ -18,4 +18,4 @@ services:
         restart: always
         environment:
           - COUCHDB_USER=admin
-          - COUCHDB_PASSWORD=password
+          - COUCHDB_PASSWORD=password 
