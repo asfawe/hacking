@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Index{% endblock %}
+
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+
+{% block content %}
+
+  <script nonce={{ nonce }}>
+    window.addEventListener("load", function() {
+      var name_elem = document.getElementById("name");
+      name_elem.innerHTML = `${location.hash.slice(1)} is my name !`;
+	  // 여기서 <script></script>를 사용할 수 있었던 이유!! 벌써 위에서 nonce로 script를 봉인 해제 해 부렸기 때문!!!!!!!!
+	  // 그렇기 때문에 id가 name으로 된 자바스크립트 태그를 사용할 때 nonce를 굳이 안 사용해도 된다!!!!
+	  // 그래서 우리 payload가 먹힌거다.
+    });
+ </script>
+  {{ param | safe }}
+  <pre id="name"></pre>
+{% endblock %}

