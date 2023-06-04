@@ -9,7 +9,7 @@ GET = 'GET'
 PATCH = 'PATCH'
 DELETE = 'DELETE'
 
-BACKEND_BASE_URL = 'http://backend:8000'
+BACKEND_BASE_URL = 'http://127.0.0.1:8000'
 
 
 app = Flask(__name__)
@@ -33,6 +33,8 @@ def curl_backend_api(path, method, client_host, token=None, data=None):
 		# 그래서 res 값이 들어갈 수 있는 거임.
 		# subprocess.run() 는 시스템?? 명령어를 실행할 수 있게 해주는 놈입니다.
 		# 예를 들면 ls, cat, curl 등등
+		# print(res.stdout.decode())
+        print(res.stderr.decode())
         return res.stdout.decode() # curl에서 출력한 걸 문자열로 return 해준다.
 		# 만약 subprocess.run에 ls를 적었다고 치면 이런 식으로 반환됨.
 		# stdout: b'app.py\nrun.sh\nrequirements.txt\n 등등'
@@ -44,7 +46,7 @@ def beautify(res): # 예쁘게 json파일을 파이썬 딕셔너리로 만드는
     r = pprint.pformat(json.loads(res))
     return r
 
-
+print("hello")
 @app.before_request # 말 그대로 http 요청 가기전에 먼저 밑에 함수가 실행되게 하는 거임.
 def before_request():
     if request.path != '/' and not request.path.startswith('/static/'):
@@ -53,6 +55,7 @@ def before_request():
         if g.simple_token is None:
             abort(401)
 
+print("end")
 @app.route('/', methods=['GET'])
 def get_index():
     res = curl_backend_api('/auth', POST, request.remote_addr) # token을 만들어 주면서 뭐 여러가지 하는 것 같음.
@@ -60,7 +63,7 @@ def get_index():
     simple_token = json.loads(res) # json.loads는 json 형식을 python 딕셔너리 형태로 만들기 위한 거다.
 
     return redirect(url_for('get_menu', simple_token=simple_token))
-
+print("haha")
 @app.route('/menu', methods=['GET'])
 def get_menu():
     return render_template('menu.html', simple_token=g.simple_token) # 이쪽까지는 그냥 기본 설정임.
@@ -81,6 +84,7 @@ def post_create():
         abort(400) # 입력 받는 title, content, author가 str인지 확인
 
     data = {'title': title, 'content': content, 'author': author} # 그 후 json 형태로 바꿔서 넣기
+    print(data) # data를 수정하는 것은 불가능...
     res = curl_backend_api('/posts', POST, request.remote_addr, g.simple_token, data)
     if res is None:
         abort(400)
@@ -133,8 +137,13 @@ def post_delete():
     if not isinstance(post_idx, str) or not post_idx.isdecimal():
         abort(400)
 
+    
     res = curl_backend_api(f'/posts/{post_idx}', DELETE, request.remote_addr, g.simple_token)
-    if res is None:
+    print("hehe", type(res))
+    if res is None: # 근데 여기서 왜 None에 안걸리지...? 분명 None로 return을 해줬는데...
         abort(400)
 
     return render_template('/api_result.html', simple_token=g.simple_token, res=res)
+
+# if __name__ == '__main__':
+#     app.run(host='localhost', port=7777)

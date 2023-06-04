@@ -4,7 +4,7 @@ from fastapi import FastAPI, Response, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
-with open('/flag', 'r') as f:
+with open('../flag', 'r') as f:
     FLAG = f.read()
 
 class Post(BaseModel):

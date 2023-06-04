@@ -1,1 +1,1 @@
-while :; do uvicorn main:app --host 0.0.0.0 --reload; done
+while :; do uvicorn main:app --host 127.0.0.1 --reload; done
