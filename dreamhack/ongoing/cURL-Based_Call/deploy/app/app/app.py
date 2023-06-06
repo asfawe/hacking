@@ -9,14 +9,14 @@ GET = 'GET'
 PATCH = 'PATCH'
 DELETE = 'DELETE'
 
-BACKEND_BASE_URL = 'http://127.0.0.1:8000'
-
+BACKEND_BASE_URL = 'http://127.0.0.1:8000' # or http://0.0.0.0:8000
 
 app = Flask(__name__)
 
-
 def curl_backend_api(path, method, client_host, token=None, data=None):
     try:
+        print("lalallallalalalallaal : ", token)
+        print("lalallallalalalallaal12121212121212 : ", client_host)
         args = [ # '/usr/bin/curl' == curl
 				 # 그냥 설치 경로 위치에서 curl을 실행시킨 거임.
             '/usr/bin/curl', f'{BACKEND_BASE_URL}{path}',
@@ -35,6 +35,7 @@ def curl_backend_api(path, method, client_host, token=None, data=None):
 		# 예를 들면 ls, cat, curl 등등
 		# print(res.stdout.decode())
         print(res.stderr.decode())
+        print("hehehehe : ", args)
         return res.stdout.decode() # curl에서 출력한 걸 문자열로 return 해준다.
 		# 만약 subprocess.run에 ls를 적었다고 치면 이런 식으로 반환됨.
 		# stdout: b'app.py\nrun.sh\nrequirements.txt\n 등등'
@@ -43,13 +44,16 @@ def curl_backend_api(path, method, client_host, token=None, data=None):
         return None
 
 def beautify(res): # 예쁘게 json파일을 파이썬 딕셔너리로 만드는 함수.
+    print("rerererererererer : ", res)
     r = pprint.pformat(json.loads(res))
+    print(r)
     return r
 
 print("hello")
 @app.before_request # 말 그대로 http 요청 가기전에 먼저 밑에 함수가 실행되게 하는 거임.
 def before_request():
     if request.path != '/' and not request.path.startswith('/static/'):
+		# /static/../???????????
         g.simple_token = request.args.get('simple_token')
 		# 여기서 g는 global 공간이라고 보면 된다.
         if g.simple_token is None:
@@ -84,7 +88,8 @@ def post_create():
         abort(400) # 입력 받는 title, content, author가 str인지 확인
 
     data = {'title': title, 'content': content, 'author': author} # 그 후 json 형태로 바꿔서 넣기
-    print(data) # data를 수정하는 것은 불가능...
+    print("kkkkkkkkkkkk : ", data) # 파이썬이 자동으로 막아주는 군아...
+    print("g.simple_token     :      ", g.simple_token)
     res = curl_backend_api('/posts', POST, request.remote_addr, g.simple_token, data)
     if res is None:
         abort(400)
@@ -137,7 +142,6 @@ def post_delete():
     if not isinstance(post_idx, str) or not post_idx.isdecimal():
         abort(400)
 
-    
     res = curl_backend_api(f'/posts/{post_idx}', DELETE, request.remote_addr, g.simple_token)
     print("hehe", type(res))
     if res is None: # 근데 여기서 왜 None에 안걸리지...? 분명 None로 return을 해줬는데...
