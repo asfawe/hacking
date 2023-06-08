@@ -30,8 +30,9 @@ def curl_backend_api(path, method, client_host, token=None, data=None):
 			'-X', method,
 			'--ignore-content-length',
 			'--max-time', '0.3',
-			'-d', json.dumps(data) if data else ''
-		]
+			'-d', json.dumps(data) if data else '' # Python의 객체를 JSON 문자열로 변환하기 위해서는 dumps() 함수를 사용합니다.
+		] # 그래서 우리가 입력한 딕셔너리가 json 형태로 들어가게 되는 거군.
+		  # 참고로 당연히 ''안에 저희 json이 찍히겠죠....
 		res = subprocess.run(args, capture_output=True)
 		# capture_output는 출력 결과를 화면에 출력 해주기 위해 있는거임.
 		# 그래서 res 값이 들어갈 수 있는 거임.
@@ -60,8 +61,11 @@ print("hello")
 # 위와 같이 실행이 되면 /create을 가기 전에 여기에 들려서 simple_token에 있는 hello를 g.simple_token으로 옮긴다.
 def before_request():
 	if request.path != '/' and not request.path.startswith('/static/'):
+		print(".DS_Store.before_request")
 		# /static/../???????????
 		g.simple_token = request.args.get('simple_token')
+		print(request.args.get('simple_token'))
+		print(g.simple_token) # 언제 돌려도 None가 나왔다 왜냐하면 요청을 보내기 전에는 모두다 simple_token이 없기 때문이다.
 		# 여기서 g는 global 공간이라고 보면 된다.
 		if g.simple_token is None:
 			abort(401)
