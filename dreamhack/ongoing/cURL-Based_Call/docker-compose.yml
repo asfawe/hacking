@@ -11,7 +11,7 @@ services:
     build:
       context: ./deploy/app
     depends_on:
-      - backend
+      - backend # 이렇게 backend를 의존하고 있기 때문에 backend를 사용할 수 있음.
     networks:
       - internal
     ports:
