@@ -102,6 +102,7 @@ def post_create():
 	print("kkkkkkkkkkkk : ", data) # 파이썬이 자동으로 막아주는 군아...
 	print("g.simple_token     :      ", g.simple_token)
 	res = curl_backend_api('/posts', POST, request.remote_addr, g.simple_token, data)
+	print(res)
 	if res is None:
 		abort(400)
 
