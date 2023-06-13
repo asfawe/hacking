@@ -24,7 +24,8 @@ def curl_backend_api(path, method, client_host, token=None, data=None):
 		args = [ # '/usr/bin/curl' == curl
 				# 그냥 설치 경로 위치에서 curl을 실행시킨 거임.
 			'/usr/bin/curl', f'{BACKEND_BASE_URL}{path}',
-			'-H', f'Simple-Token: {token}',
+			'--verbose',
+			'-H', f'Simple-Token: {token}', # 여기서 crlf 공격을 할 수 있음.
 			'-H', f'X-Forwarded-For: {client_host}', # 여기서 X-Forwarded-For의 client의 ip를 넣어주는 군...
 			'-H', 'Content-Type: application/json',
 			'-X', method,
@@ -34,13 +35,17 @@ def curl_backend_api(path, method, client_host, token=None, data=None):
 		] # 그래서 우리가 입력한 딕셔너리가 json 형태로 들어가게 되는 거군.
 		  # 참고로 당연히 ''안에 저희 json이 찍히겠죠....
 		res = subprocess.run(args, capture_output=True)
+		res2 = subprocess.run(args, capture_output=True, text=True)
 		# capture_output는 출력 결과를 화면에 출력 해주기 위해 있는거임.
 		# 그래서 res 값이 들어갈 수 있는 거임.
 		# subprocess.run() 는 시스템?? 명령어를 실행할 수 있게 해주는 놈입니다.
 		# 예를 들면 ls, cat, curl 등등
 		# print(res.stdout.decode())
+		print("Standard Output:\n", res2.stdout)
+		print("Standard Error:\n", res2.stderr)
 		print(res.stderr.decode())
 		print("hehehehe : ", args)
+		print(res)
 		return res.stdout.decode() # curl에서 출력한 걸 문자열로 return 해준다.
 		# 만약 subprocess.run에 ls를 적었다고 치면 이런 식으로 반환됨.
 		# stdout: b'app.py\nrun.sh\nrequirements.txt\n 등등'
