@@ -21,6 +21,7 @@ def curl_backend_api(path, method, client_host, token=None, data=None):
 	try:
 		print("lalallallalalalallaal : ", token)
 		print("lalallallalalalallaal12121212121212 : ", client_host)
+		print(data)
 		args = [ # '/usr/bin/curl' == curl
 				# 그냥 설치 경로 위치에서 curl을 실행시킨 거임.
 			'/usr/bin/curl', f'{BACKEND_BASE_URL}{path}',
@@ -159,12 +160,9 @@ def post_delete():
 	if not isinstance(post_idx, str) or not post_idx.isdecimal():
 		abort(400)
 
-	res = curl_backend_api(f'/posts/{post_idx}', DELETE, request.remote_addr, g.simple_token)
+	res = curl_backend_api(f'/posts/{post_idx}', DELETE, request.remote_addr, g.simple_token)	
 	print("hehe", type(res))
 	if res is None: # 근데 여기서 왜 None에 안걸리지...? 분명 None로 return을 해줬는데...
 		abort(400)
 
 	return render_template('/api_result.html', simple_token=g.simple_token, res=res)
-
-# if __name__ == '__main__':
-#     app.run(host='localhost', port=7777)
