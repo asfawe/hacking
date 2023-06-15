@@ -42,8 +42,8 @@ def curl_backend_api(path, method, client_host, token=None, data=None):
 		# subprocess.run() 는 시스템?? 명령어를 실행할 수 있게 해주는 놈입니다.
 		# 예를 들면 ls, cat, curl 등등
 		# print(res.stdout.decode())
-		print("Standard Output:\n", res2.stdout)
-		print("Standard Error:\n", res2.stderr)
+		# print("Standard Output:\n", res2.stdout)
+		# print("Standard Error:\n", res2.stderr)
 		print(res.stderr.decode())
 		print("hehehehe : ", args)
 		print(res)
@@ -54,11 +54,8 @@ def curl_backend_api(path, method, client_host, token=None, data=None):
 	except: # 만약 실행 실패를 했다면 None를 반환합니다.
 		return None
 
-def beautify(res): # 예쁘게 json파일을 파이썬 딕셔너리로 만드는 함수.
-	print("rerererererererer : ", res)
-	print("lalalla : ", json.loads(res))
+def beautify(res):
 	r = pprint.pformat(json.loads(res))
-	print(r)
 	return r
 
 print("hello")
