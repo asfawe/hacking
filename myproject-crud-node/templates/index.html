@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Main Page</title>
+  <style>
+    body {
+      background-image: url('/background.jpg');
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+    }
+
+    .message {
+      font-size: 2em;
+      margin-bottom: 1em;
+    }
+
+    .button {
+      font-size: 1em;
+      margin: 0.5em;
+      padding: 0.25em 1em;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="message">Hello World</div>
+  <div class="button-container">
+    <button class="button" id="signInButton">Sign In</button>
+    <button class="button" id="signUpButton">Sign Up</button>
+    <button class="button" id="writeButton">Write</button>
+    <button class="button" id="readButton">Read</button>
+  </div>
+
+  <script>
+    document.getElementById('signInButton').addEventListener('click', function() {
+      window.location.href = "/signin";
+    });
+
+    document.getElementById('signUpButton').addEventListener('click', function() {
+      window.location.href = "/signup";
+    });
+
+    document.getElementById('writeButton').addEventListener('click', function() {
+      window.location.href = "/write";
+    });
+
+    document.getElementById('readButton').addEventListener('click', function() {
+      window.location.href = "/read";
+    });
+  </script>
+</body>
+</html>
