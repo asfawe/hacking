@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comments</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add custom CSS -->
+    <style>
+        body {
+            padding: 20px;
+        }
+        .comment {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f8f8f8;
+        }
+        .comment h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Comments</h1>
+        <% comments.forEach(function(comment){ %>
+            <div class="comment">
+                <h2><%= comment.title %></h2>
+                <p><%= comment.description %></p>
+            </div>
+        <% }); %>
+    </div>
+</body>
+</html>
