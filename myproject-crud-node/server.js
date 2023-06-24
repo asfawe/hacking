@@ -82,7 +82,8 @@ app.post('/write', async (req, res) => {
 		await Comment.create({
 			title: title,
 			description: description,
-			user: req.session.user._id,
+			user: req.session.user,
+			
 		});
 		return res.redirect('/');
 	} catch (err) {
@@ -91,8 +92,13 @@ app.post('/write', async (req, res) => {
 });
 
 app.get('/read', async (req, res) => {
-	const comments = await Comment.find({});
-	return res.render('read', { comments: comments });
+	const user = req.session.user._id;
+    const comments = await Comment.find({user: user}).populate('user');
+	// populate('user')를 호출하여 각 댓글의 'user' 필드를 실제 User 객체로 대체합니다. 이렇게 하면 comment.user를 통해 사용자 정보에 직접 접근할 수 있습니다.
+	
+	return res.render('read', {comments: comments}); // 왜 comment를 중괄호로 감싸서 넘기나요? 자바스크립트에서는 중괄호를 객체를 정의할 때 사용합니다.
+	// 아 그건 그렇고 그냥 res.render에서는 객체로 두번째 인자값을 받습니다. 그리고 객체로 넘겨줘야 ejs에서 접근을 할 수 있기 때문입니다.
+	/* 만약 res.render('read', comments);와 같이 사용하면, EJS 템플릿에서는 comments라는 변수를 사용할 수 없고, 대신 comments 배열의 각 요소에 직접 접근해야 합니다. 이는 코드를 읽고 이해하는 데 복잡성을 더할 수 있습니다. */
 });
 
 app.listen(port, (err) => {
