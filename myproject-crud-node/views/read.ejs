@@ -4,6 +4,7 @@
     <title>Comments</title>
     <!-- Add Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Add custom CSS -->
     <style>
         body {
@@ -24,12 +25,14 @@
 <body>
     <div class="container">
         <h1>Comments</h1>
-        <% comments.forEach(function(comment){ %>
-            <div class="comment">
-                <h2><%= comment.title %></h2>
-                <p><%= comment.description %></p>
-            </div>
-        <% }); %>
+        <% comments.forEach(function(comment) { %>
+			<div class="comment">
+			  <p><%= comment.title %></p>
+			  <% if (comment.user._id.toString() === user.toString()) { %>
+				<a href="/comments/edit/<%= comment._id %>"><i class="fa fa-pencil"></i></a>
+			  <% } %>
+			</div>
+		  <% }); %>
     </div>
 </body>
 </html>
