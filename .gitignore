@@ -1,4 +1,4 @@
-myproject-crud-node/account.txt
-myproject-crud-node/variables.env
-myproject-crud-node/node_modules/
+*account.txt
+*variables.env
+*node_modules/
 *.DS_Store
