@@ -40,8 +40,10 @@
   <div class="button-container">
     <button class="button" id="signInButton">Sign In</button>
     <button class="button" id="signUpButton">Sign Up</button>
+	<% if (user) { %>
     <button class="button" id="writeButton">Write</button>
     <button class="button" id="readButton">Read</button>
+	<% } %>
   </div>
 
   <script>

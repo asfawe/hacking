@@ -6,9 +6,14 @@
         body {
             text-align: center;
             padding: 150px;
+            background: #F3F3F3;
         }
         h1 {
-            font-size: 50px;
+            font-size: 60px;
+            color: #333;
+        }
+        h2 {
+            color: #666;
         }
         body {
             font: 20px Helvetica, sans-serif;
@@ -19,16 +24,28 @@
             text-align: left;
             width: 650px;
             margin: 0 auto;
+            padding: 20px;
+            background: #FFF;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <article>
-        <h1>Oops! Page Not Found.</h1>
-        <div>
-            <p>Sorry, but the page you were trying to view does not exist.</p>
-            <p>It looks like this was the result of either a mistyped address or an out-of-date link.</p>
-        </div>
+        <h1>Oops!</h1>
+        <h2>페이지를 찾을 수 없습니다.</h2>
+        <p>죄송합니다. 찾으시는 페이지가 없거나 이동되었습니다. 아래의 버튼을 클릭하여 메인 페이지로 돌아갈 수 있습니다.</p>
 		<a href="/" style="display: inline-block; padding: 10px 20px; background-color: #333; color: #fff; text-decoration: none; border-radius: 5px;">돌아가기</a>
     </article>
 </body>
