@@ -23,6 +23,8 @@ const reportInit = () => {
 
 const getReportList = () => {
   const allReportList = JSON.parse(JSON.stringify(report_list));
+  // 이 방법을 사용하면 원본 report_list 객체와 독립적인 복사본이 생성되어 참조 없이 객체를 복사할 수 있습니다.
+  //   const allReportList = report_list; 이러면 독립적인 복사본이 안됨..
   for (let report in allReportList) {
     if (allReportList[report].group == "super_admin") {
       allReportList[report].msg = "Access Denied";
