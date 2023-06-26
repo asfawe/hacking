@@ -33,7 +33,7 @@ const login = (id, pw) => {
   }
 };
 
-const adminInit = () => {
+const adminInit = () => { // 아하 ㅋㅋㅋㅋ admin session 만들려고 한거였군..크흠..🤓
   const time = getTime();
   session["admin"] = encoding("[**SECRET**]" + time);
   setTimeout(() => {

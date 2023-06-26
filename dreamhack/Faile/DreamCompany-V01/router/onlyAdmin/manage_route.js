@@ -13,6 +13,7 @@ router.get("/", checkToken, function (req, res, next) {
   );
 });
 
+// 으흠...!! 그러면 만약 이걸 우회하면 모든 session을 json 형태로 볼 수 있기 때문에 admin도 볼 수 있겠네??
 router.get("/session", checkToken, function (req, res, next) {
   const all_session = session.all_session;
   res

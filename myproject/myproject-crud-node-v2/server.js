@@ -1,12 +1,35 @@
 const express = require('express');
 const logger = require('morgan');
+const session = require('express-session');
+const cookieParser = require("cookie-parser");
 const main_router = require('./router/main/main_route');
 const app = express();
 
 app.set('view engine', 'ejs');
 app.set("views", __dirname + "/pages/html");
 
+
+app.use(cookieParser("[**SECRET_KEY**]"));
 app.use(logger("dev")); // GET / 304 5.973 ms - - http 요청 볼 수 있음 😳
+app.use(
+	session({
+	  resave: false,
+	  saveUninitialized: true,
+	  secret: "[**SECRET_KEY**]",
+	  cookie: {
+		httpOnly: true, // JavaScript를 통해 쿠키에 접근하는 것을 방지합니다. 
+		secure: false, // 웹 브라우저는 쿠키를 HTTPS를 통해만 서버로 전송합니다. 
+	  },
+	  name: "cookie",
+	})
+);
+
+app.get('/session', (req, res) => {
+	res
+    .json({
+      session: "session_password",
+    });
+});
 
 app.use(function (req, res, next) {
 	// res.setHeader("Access-Control-Allow-Origin", "example.com");
