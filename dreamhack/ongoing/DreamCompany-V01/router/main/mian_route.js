@@ -8,7 +8,7 @@ router.use(express.static("../pages/image"));
 
 router.get("/", function (req, res, next) {
   res.sendFile(
-    path.join(__dirname, "..", "..", "..", "/pages/html/index.html")
+    path.join(__dirname, "..", "..", "/views/index.html")
   );
 });
 

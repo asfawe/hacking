@@ -14,6 +14,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser("[**SECRET_KEY**]")); // cookie를 사용하는 이유는 jwt token을 쿠키에 저장하기 위해서 이다.
 
+app.use(express.static("./views/"));
+
 // session은 저장소다. 여기서 session을 어떻게 사용하는가? 라고 물어봤을 때
 // 나는 이렇게 답하고 싶다. "jwt token을 쿠키에 담기위해서 사용한다."
 // 결국에는 우리가 만든 session.js 는 jwt token을 생성하기 위해서 있는거다.
@@ -23,7 +25,7 @@ app.use(cookieParser("[**SECRET_KEY**]")); // cookie를 사용하는 이유는 j
 app.use(
   session({
     resave: false,
-    saveUninitialize: true, // 오타 같은디... saveUninitialize가 아니라 saveUninitialized 인것 같은데...
+    saveUninitialized: true, // 오타 같은디... saveUninitialize가 아니라 saveUninitialized 인것 같은데...
     secret: "[**SECRET_KEY**]",
     cookie: {
       httpOnly: true, // JavaScript를 통해 쿠키에 접근하는 것을 방지합니다. 
@@ -47,7 +49,7 @@ app.use(function (req, res, next) {
 app.use("/", Router.mainRouter);
 app.use("/user", Router.accountRouter);
 app.use("/report", Router.adminRouter);
-app.use("/manage", Router.manageRouter);
+app.use("/", Router.manageRouter);
 
 app.use(function (req, res, next) {
   var err = new Error("Page Not Found");

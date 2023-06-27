@@ -43,6 +43,7 @@ const adminInit = () => { // 아하 ㅋㅋㅋㅋ admin session 만들려고 한�
 
 const checkAdmin = (id, pw) => {
   if (String(id["admin_id"]).indexOf("admin") === -1) {
+	console.log("faile");
     return false;
   } else {
     const time = id["time"] ? id["time"] : getTime();
@@ -77,10 +78,13 @@ const overlapSession = (id) => {
 
 const checkSession = (id, pw) => {
   try {
+	console.log(typeof id);
     if (typeof id === "object") {
+		console.log("object");
       isAdmin = checkAdmin(id, pw) === true ? "ADMIN" : login(id, pw);
       return isAdmin;
     } else {
+		console.log("Not object");
       return login(id, pw);
     }
   } catch (e) {
@@ -95,4 +99,5 @@ module.exports.adminInit = adminInit;
 module.exports.all_session = {
   login_session: session,
   login_log: log,
+
 };

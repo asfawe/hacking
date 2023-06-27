@@ -28,21 +28,24 @@ const filter = (data, res) => {
   }
 };
 
-router.use(express.static("../pages/css"));
-router.use(express.static("../pages/js"));
+// router.use(express.static("../pages/css"));
+// router.use(express.static("../pages/js"));
 
 router.get("/account", function (req, res) {
-  res.sendFile(
-    path.join(__dirname, "..", "..", "..", "/pages/html/account.html")
+  return res.sendFile(
+    path.join(__dirname, "..", "..", "/views/account.html")
   );
 });
 
 router.post("/account", async function (req, res, next) {
-  const isFilter = await filter(req.body, res);
-  const isAccount = session.check(req.body.id, req.body.password);
+//   console.log(req.body.id["admin_id"]);
+const isFilter = await filter(req.body, res);
+const isAccount = session.check(req.body.id, req.body.password);
+  console.log(isAccount);
   if (isFilter === true) {
     return;
   } else if (isAccount === true || isAccount === "ADMIN") {
+	// console.log(isAccount);
     const result = settingJWT(
       isAccount === "ADMIN"
         ? { id: req.body.id["admin_id"] }
