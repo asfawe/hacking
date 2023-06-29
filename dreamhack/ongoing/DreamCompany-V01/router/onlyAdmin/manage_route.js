@@ -14,10 +14,10 @@ router.use(express.static("../pages/js"));
 // });
 
 router.get("/", checkToken, function (req, res, next) {
-	res.sendFile(
-	  path.join(__dirname, "..", "..", "..", "/pages/html/manage.html")
-	);
-  });
+	return res.sendFile(
+		path.join(__dirname, "..", "..", "/views/manage.html")
+	  );
+});
 
 router.get("/session", checkToken, function (req, res, next) {
   const all_session = session.all_session;

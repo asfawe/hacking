@@ -19,4 +19,9 @@ router.get('/hehe', (req, res) => {
 	console.log(res.statusCode);
 });
 
+router.get('/haha/:id' , (req, res) => {
+	console.log(req.params.id);
+	res.send(req.params.id);
+});
+
 module.exports = router;

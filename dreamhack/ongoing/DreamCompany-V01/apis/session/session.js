@@ -33,7 +33,7 @@ const login = (id, pw) => {
   }
 };
 
-const adminInit = () => { // 아하 ㅋㅋㅋㅋ admin session 만들려고 한거였군..크흠..🤓
+const adminInit = () => {
   const time = getTime();
   session["admin"] = encoding("[**SECRET**]" + time);
   setTimeout(() => {
@@ -79,8 +79,7 @@ const overlapSession = (id) => {
 const checkSession = (id, pw) => {
   try {
 	console.log(typeof id);
-    if (typeof id === "object") {
-		console.log("object");
+    if (typeof id === "object") { // addSession에서 이런 식으로 계정 만듬. 그래서 객체여야 함.
       isAdmin = checkAdmin(id, pw) === true ? "ADMIN" : login(id, pw);
       return isAdmin;
     } else {

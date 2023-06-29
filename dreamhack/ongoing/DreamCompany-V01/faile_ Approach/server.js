@@ -49,7 +49,7 @@ app.use(function (req, res, next) {
 app.use("/", Router.mainRouter);
 app.use("/user", Router.accountRouter);
 app.use("/report", Router.adminRouter);
-app.use("/", Router.manageRouter);
+app.use("/manage", Router.manageRouter);
 
 app.use(function (req, res, next) {
   var err = new Error("Page Not Found");
