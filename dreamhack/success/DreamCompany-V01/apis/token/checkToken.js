@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 
 const checkGroup = (req, value) => {
   let manager = /(manager[0-9]*)\w/g.test(value);
-  // guest0manager01 우회 했당...😳
   if ((manager === true && !req.path.toLowerCase().includes("admin")) || value === "admin")
     return true;
   else return false;

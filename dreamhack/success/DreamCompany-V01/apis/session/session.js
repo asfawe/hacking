@@ -78,8 +78,8 @@ const overlapSession = (id) => {
 
 const checkSession = (id, pw) => {
   try {
-	console.log(typeof id);
     if (typeof id === "object") { // addSession에서 이런 식으로 계정 만듬. 그래서 객체여야 함.
+		console.log("admin")
       isAdmin = checkAdmin(id, pw) === true ? "ADMIN" : login(id, pw);
       return isAdmin;
     } else {

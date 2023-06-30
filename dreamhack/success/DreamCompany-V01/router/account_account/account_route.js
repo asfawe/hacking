@@ -38,7 +38,7 @@ router.get("/account", function (req, res) {
 });
 
 router.post("/account", async function (req, res, next) {
-//   console.log(req.body.id["admin_id"]);
+  console.log(typeof req.body.id);
 const isFilter = await filter(req.body, res);
 const isAccount = session.check(req.body.id, req.body.password);
   console.log(isAccount);

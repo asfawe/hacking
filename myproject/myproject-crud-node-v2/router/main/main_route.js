@@ -1,5 +1,16 @@
 const express = require('express');
 const router = express.Router();
+let a, b;
+const getTime = () => {
+	let today = new Date();
+	let hours = today.getHours();
+	let minutes = today.getMinutes();
+	let seconds = today.getSeconds();
+	let milliseconds = today.getMilliseconds();
+	return (
+	  String(hours) + String(minutes) + String(seconds) + String(milliseconds)
+	);
+  };
 
 router.get('/', (req, res) => {
 	res.cookie("cookie", "hahaha");
@@ -24,4 +35,19 @@ router.get('/haha/:id' , (req, res) => {
 	res.send(req.params.id);
 });
 
+router.get('/lala', (req, res)=>{
+	setTimeout(() => {
+		a = getTime();
+	  }, 1000);
+	  console.log(a);
+	  res.send(a);
+});
+
+router.get('/hoho' , (req, res) => {
+console.log(b);
+	res.send(getTime());
+});
 module.exports = router;
+
+console.log(a);
+console.log(b);

