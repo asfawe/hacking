@@ -44,10 +44,9 @@ def wait_server():
             continue
 
 
-if __name__ == '__main__': # 이 뜻은 __name__이 __main__이어야 한다는 뜻이다 쉽게 설명하자면 python3 admin.py로 실행하면 __name__은 __main__이 되고
-	# test.py에서 import admin.py를 불러와서 실행하면 __name__은 test로 설정이 된다. 그러니깐 직접적으로 admin.py를 실행 시킬 때만 이 코드를 실행시키라는 말이다. 
+if __name__ == '__main__':
     wait_server()
-    with requests.Session() as session: # requests.Session()을 session이라는 이름으로 사용하겠다.
+    with requests.Session() as session:
         admin_auth_data = {
             'username': 'admin',
             'password': environ.get('ADMIN_PASSWORD'),
