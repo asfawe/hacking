@@ -20,7 +20,7 @@ app.use(
 		httpOnly: true, // JavaScript를 통해 쿠키에 접근하는 것을 방지합니다. 
 		secure: false, // 웹 브라우저는 쿠키를 HTTPS를 통해만 서버로 전송합니다. 
 	  },
-	  name: "cookie",
+	  name: "COOKIE",
 	})
 );
 
