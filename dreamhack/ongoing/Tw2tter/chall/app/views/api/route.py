@@ -7,7 +7,7 @@ from app.components.api_token import create_token, validate_token, remove_token,
 from app.views.api.utils import ApiResponse, Permission, json_response, require_token, get_posts, get_post, fail
 
 
-bp = Blueprint('api', __name__)
+bp = Blueprint('api', __name__) # 약간 node js에서 라우트 같은 느낌, 앞 아규먼트는 
 
 
 @bp.route('/api/auth', methods=['POST'])

@@ -18,7 +18,7 @@ def init_db(app):
         db.session.add(User(username='guest', password='guest'))
         db.session.add(Post(title='I am admin user', content='Nice to meet you, 여러분. 나는 관리자 of Tw2tter. Epsilon Mask 입니다 😉', author_id=1))
         db.session.add(Post(title='이렇게 적으면 되나?', content=os.environ.get('FLAG'), author_id=2, hidden=True))
-		# author_id로 로그인 해서 flag를 확인한다.
+		# author_id=2로 로그인 해서 flag를 확인한다.
         db.session.add(Post(title='큰일 날 뻔 했네요', content='Tw2tter는 처음이라 아무거나 막 누르다가 개인정보를 업로드해버렸어요 😅😅 바로 글을 숨겼는데 그 사이에 본 사람은 없겠죠...??', author_id=2))
         db.session.add(Post(title='안녕하세요', content='여긴 정말 한적하네요', author_id=3))
         db.session.commit()
