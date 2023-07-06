@@ -7,7 +7,11 @@ from app.components.api_token import create_token, validate_token, remove_token,
 from app.views.api.utils import ApiResponse, Permission, json_response, require_token, get_posts, get_post, fail
 
 
-bp = Blueprint('api', __name__) # 약간 node js에서 라우트 같은 느낌, 앞 아규먼트는 
+bp = Blueprint('api', __name__) 
+# Blueprint를 사용하면 Flask 애플리케이션의 라우트와 기타 코드를 모듈화하고 재사용할 수 있어, 애플리케이션의 구조와 유지 관리를 훨씬 쉽게 만들 수 있습니다.
+# 첫 번째 아규먼트는 blueprint의 이름이고 두 번째 아규먼트는 blueprint가 정의된 Python 모듈의 이름입니다. 
+# Flask는 이 정보를 사용하여 blueprint와 관련된 리소스를 찾습니다.
+# 세 번째 아규먼트도 지정할 수 있지만 지정하지 않으면 자동으로 '/'로
 
 
 @bp.route('/api/auth', methods=['POST'])
