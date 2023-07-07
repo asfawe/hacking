@@ -67,7 +67,7 @@ def post():
         'title': post.title,
         'author': get_user(post.author_id).username,
         'hidden': post.hidden,
-    } for post in posts]
+    } for post in posts] # posts에 있는 여러개의 게시물이 post로 들어가서 posts라는 딕셔너리를 만들 수 있도록 도와줌
     return render_template_wrapper('post.html', posts=posts)
 
 
@@ -92,7 +92,7 @@ def post_report(post_id):
 
 
 @bp.route('/post/report/<int:post_id>', methods=['POST'])
-@require_login
+@require_login # 오호 이런 식으로 로그인 확인할 수도 있군아~
 def post_report_submit(post_id):
     reporter_id = session.get('user_id')
     reporter = get_user(reporter_id)

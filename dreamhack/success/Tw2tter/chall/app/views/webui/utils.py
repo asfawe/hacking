@@ -50,12 +50,12 @@ def is_admin(session):
     return session.get('user_id') == 1
 
 
-def permission_for_post(session, post):
-    permission = Permission()
+def permission_for_post(session, post): # 요청한 게시물 글? 의 권한이 있는지 확인
+    permission = Permission() # 그냥 오리지날 Permission은 read = False, write = False
     user_id = session.get('user_id')
-    if is_admin(session) or user_id == post.author_id or not post.hidden:
+    if is_admin(session) or user_id == post.author_id or not post.hidden:	
         permission.read = True
-    if is_admin(session) or user_id == post.author_id:
+    if is_admin(session) or user_id == post.author_id: # 지금 로그인 한 user와 글을 쓴 user와 똑같냐?
         permission.write = True
     return permission
 
@@ -69,5 +69,9 @@ def get_post(session, post_id, permission=Permission()):
 
 
 def get_posts(session, permission=Permission()):
-    posts = get_posts_from_db()
+    posts = get_posts_from_db() # 요청한 게시물 글?을 posts로
     return filter(lambda post: permission_for_post(session, post) <= permission, posts)
+	# posts값이 post로
+	# 만약 요청한 게시글의 권한보다 user의 권한이 같거나 크면 보여줌.
+	# 만약 admin 게시물과 write 권한을 요청했다면 guest로는 write가 안되기 때문에 바로 빠꾸!
+	# 권한 확인 후 알 맞는 게시물 보여주기 & 쓰기 가능하게 하기

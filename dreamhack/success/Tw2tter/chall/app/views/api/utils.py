@@ -51,7 +51,10 @@ class Permission:
     # None: Any
     write: bool = False
 
-    def __le__(self, other):
+    def __le__(self, other): 
+		# __le__는 python에서 매직 메서드라고 합니다. 
+		# 만약 Permission 인스턴스끼리 비교 연산자 나오면 바로 실행되는 함수입니다.
+
         assert isinstance(other, Permission)
         # True <= False
         def le(elem1, elem2):
@@ -60,7 +63,31 @@ class Permission:
             le(getattr(self, field.name), getattr(other, field.name))
             for field in fields(self)
         )
+#####################################
 
+          # example code #
+
+# class MyNumber:
+#     def __init__(self, value):
+#         self.value = value
+
+#     def __le__(self, other):
+#         if isinstance(other, MyNumber):
+#             return self.value <= other.value
+#         else:
+#             raise TypeError("Unsupported type for comparison")
+
+# num1 = MyNumber(1)
+# num2 = MyNumber(2)
+# print(num1 <= num2)  # 출력: True
+
+# 여기서 num1 <= num2를 실행하면, 사실은 num1.__le__(num2)를 호출하는 것과 같습니다. 
+# 여기서 num1이 self가 되고, num2가 other가 됩니다. 
+# 이 메서드는 self 즉 num1이 other 즉 num2보다 작거나 같은지 (self.value <= other.value)를 판별하고 결과를 반환합니다.
+
+# 따라서 other는 <= 연산자를 사용하여 self와 비교되는 객체를 나타냅니다.
+
+#####################################
 
 def is_admin(api_token):
     return api_token.is_admin
