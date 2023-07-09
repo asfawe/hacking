@@ -113,7 +113,7 @@ def admin_report_get():
 
     api_token = get_token(token)
 
-    if report_id:
+    if report_id: # admin에서 get_repots로 요청했을 때 id를 같이 안 보내줬기 때문에 else문으로~ gogo~
         report = get_report(report_id)
         post = get_post(api_token, report.post_id)
         report = {
@@ -125,7 +125,7 @@ def admin_report_get():
         }
         remove_token(token)
         return ApiResponse(True, {'report': report}).json()
-    else:
+    else: # 모든 신고 내역 받아오기~ admin은 최고 권력자~
         reports = [{
             'id': report.id,
             'post_title': get_post(api_token, report.post_id).title,

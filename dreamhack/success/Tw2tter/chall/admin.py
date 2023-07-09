@@ -53,8 +53,10 @@ if __name__ == '__main__':
         }
         while True:
             try:
-                result = get_reports(session, admin_auth_data)
+                result = get_reports(session, admin_auth_data) # 모든 신고 내역을 받아옴
                 report_ids = [report.get('id') for report in result.get('data').get('reports')]
+				# result.get('data') 부분에 모든 정보들이 있음. 그 중에 reports 정보들도 있음.
+				# 모든 신고를 하나씩 처리함
                 for report_id in report_ids:
                     result = accept_report(session, admin_auth_data, report_id)
 					# 아.아.아. 삭제 같은 요청들을 admin에서 해주고 그 api token이 검증에 실패해도 삭제되지 않음.
