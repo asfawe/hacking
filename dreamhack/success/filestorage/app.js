@@ -29,7 +29,7 @@ function setValue(obj, key, value) {
   }
 }
 
-app.use(bodyParser.urlencoded({ extended: false })); // 이거를 적어야 실행이 되는게 있었는데....;;;;
+app.use(bodyParser.urlencoded({ extended: false })); // 이거를 적어야 실행이 되는게 있었는데....;;;; form 입력값 받으려면 입력해야 함.
 app.set('view engine','ejs');
 
 app.get('/',function(req,resp){

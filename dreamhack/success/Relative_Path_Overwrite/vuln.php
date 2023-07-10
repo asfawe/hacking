@@ -13,6 +13,5 @@
             }
         }
     }
-
     param_elem.innerHTML = param; // innerHTML로 렌더링되는 경우, 브라우저는 스크립트 태그를 실행하지 않습니다. 그러나 <img> 태그의 onerror 속성과 같은 이벤트 속성은 웹 페이지가 로드될 때 실행되므로 공격이 가능합니다.
 </script>
