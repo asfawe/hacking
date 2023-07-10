@@ -27,7 +27,7 @@ async function doLogin(id, pw) {
         }
     } catch {}
 }
-
+	
 async function insertResponse(uid, res) {
     try {
         await query("INSERT INTO responses (uid, res) VALUES (?, ?)", [uid, JSON.stringify(res)]);
