@@ -1,9 +1,10 @@
-from models import Memo
-import time
+from test2 import test, a
 
 def set_attr(obj, prop, value):
     prop_chain = prop.split('.')
-    cur_prop = prop_chain[0] # password
+    cur_prop = prop_chain[0]
+    print(prop_chain)
+    print(cur_prop)
     if len(prop_chain) == 1:
         if isinstance(obj, dict):
             obj[cur_prop] = value
@@ -22,9 +23,10 @@ def set_attr(obj, prop, value):
             else:
                 next_obj = {}
                 setattr(obj, cur_prop, next_obj)
+        # print(next_obj)
         set_attr(next_obj, '.'.join(prop_chain[1:]), value)
 
-memo = Memo.get_memo_by_id("b66951df-4a7d-423f-b164-f7b37b9d9605")
 
-set_attr(memo, "title" + ".data", "hehe")
-set_attr(memo, "user" + ".edit_time", time.time())
+set_attr(test, '__init__.__globals__.__loader__.__init__.__globals__.sys.modules.__main__.test2.secret.password.data', '122222')
+
+print(a.password.data)

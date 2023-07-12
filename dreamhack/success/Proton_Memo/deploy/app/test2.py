@@ -7,12 +7,11 @@ import time
 
 class Password:
     data: str
-
     def __init__(self, data: str) -> None:
-        self.data = hashlib.sha256(data.encode()).hexdigest()
+        self.data = data
 
     def check_password(self, password: str) -> bool:
-        return self.data == hashlib.sha256(password.encode()).hexdigest()
+        return self.data == password
 
 
 class Title:
@@ -103,3 +102,9 @@ class Memo:
         print(memo.title.data)
         Memo.collections[memo.id] = memo
     # print(Memo.collections.keys())
+
+secret = Memo("secret", "secret", "secret")
+
+test = Memo("test", "test", "test")
+
+a = secret

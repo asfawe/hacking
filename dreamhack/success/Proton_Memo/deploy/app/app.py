@@ -3,7 +3,8 @@ import os
 from uuid import UUID
 from flask import Flask, render_template, request, redirect, url_for, abort
 from utils import set_attr
-from models import Memo, Password
+from models import Memo
+import hashlib
 
 def get_memo_with_auth_or_abort(memo_id: str, password: str) -> Memo:
     memo = Memo.get_memo_by_id(memo_id)
@@ -15,18 +16,20 @@ def get_memo_with_auth_or_abort(memo_id: str, password: str) -> Memo:
 
     return memo
 
+password2 = os.urandom(20).hex()
 
-secret = Memo("secret", open("../flag", "r").read(), os.urandom(20).hex())
-
+secret = Memo("secret", open("/flag", "r").read(), password2)
+test = Memo("test", "1234", "1234")
+# print(secret.password.data)
+# print(hashlib.sha256(password2.encode()).hexdigest())
 Memo.add_memo_to_collection(secret)
+Memo.add_memo_to_collection(test)
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def index():
-    # P = Password
-    # print(P.all_print())
     memo_title_list = [
         (memo.id, memo.get_title()) for memo in Memo.collections.values()
     ]
@@ -49,6 +52,7 @@ def new_memo():
 
 @app.route("/edit/<uuid:memo_id>", methods=["GET", "POST"])
 def edit_memo(memo_id: UUID):
+    print(secret.password.data)
     memo_id = str(memo_id)
 
     if request.method == "GET":
@@ -62,8 +66,7 @@ def edit_memo(memo_id: UUID):
 
         set_attr(memo, selected_option + ".data", edit_data)
         set_attr(memo, selected_option + ".edit_time", time.time())
-        # all_passwords = [(memo.id, ) for memo in Memo.collections.values()]
-        # print(all_passwords)
+
         return redirect(url_for("index"))
 
 

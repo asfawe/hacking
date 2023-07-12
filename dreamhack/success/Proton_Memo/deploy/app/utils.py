@@ -1,9 +1,10 @@
+from models import Memo
+
+test = Memo("test", "1234", "1234")
+
 def set_attr(obj, prop, value):
-	# obj = user_id;
-	# prop = password.data;
-	# value = 1212;
-    prop_chain = prop.split('.') # ['password', 'data']
-    cur_prop = prop_chain[0] # password
+    prop_chain = prop.split('.')
+    cur_prop = prop_chain[0]
     if len(prop_chain) == 1:
         if isinstance(obj, dict):
             obj[cur_prop] = value
@@ -17,9 +18,12 @@ def set_attr(obj, prop, value):
                 next_obj = {}
                 obj[cur_prop] = next_obj
         else:
-            if hasattr(obj, cur_prop): # obj에 
+            if hasattr(obj, cur_prop):
                 next_obj = getattr(obj, cur_prop)
             else:
                 next_obj = {}
                 setattr(obj, cur_prop, next_obj)
+        print(next_obj)
         set_attr(next_obj, '.'.join(prop_chain[1:]), value)
+
+print(test)
