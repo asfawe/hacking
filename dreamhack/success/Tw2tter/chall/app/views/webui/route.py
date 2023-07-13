@@ -52,7 +52,7 @@ def register_post():
     password = request.form.get('password')
     if username is None or password is None:
         return redirect('/auth/register')
-    if username in [user.username for user in get_users()]: # 중복저리 사용자
+    if username in [user.username for user in get_users()]: # 중복처리 사용자
         return redirect('/auth/register')
     add_user(username, password)
     return redirect('/auth/login')

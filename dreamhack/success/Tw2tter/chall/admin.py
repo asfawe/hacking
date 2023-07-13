@@ -70,4 +70,5 @@ if __name__ == '__main__':
 
             except Exception:
                 pass
-            sleep(5)
+            sleep(5) # 5초 안에 최대한 많이 신고를 접수.
+			# 여러개 게시물을 만들면 신고를 더 많이 할 수 있음.
