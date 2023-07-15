@@ -10,7 +10,7 @@ const methodOverride = require('method-override');
 
 require('dotenv').config({path:'variables.env'}); // dotenv 파일이 어디있냐? 바로 variable.env 파일 안에 있다.
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true })); // 아주 중요한 것이여!! extended를 설정 안하면 Array, Object를 다 그냥 생으로 받음!!!!
 app.use(methodOverride('_method'));
 app.use(express.static('./public/'));
 app.use('/404', function(req, res) {
